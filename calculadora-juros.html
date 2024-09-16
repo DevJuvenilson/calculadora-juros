@@ -45,19 +45,107 @@
                 max-width: 700px;
             }
         }
+
+        .voltar {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: background-color 0.3s ease;
+        }
+
+        .voltar:hover {
+            cursor: pointer;
+            background-color: #f4f4f4;
+        }
+
+        .voltar>img {
+            width: 40px;
+            height: 40px;
+            border-radius: 100px;
+        }
+
+        .conteudo {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Responsividade: quando a tela for menor que 600px */
+        @media (max-width: 600px) {
+            .conteudo {
+                flex-direction: column;
+                /* Empilha as divs verticalmente em telas pequenas */
+            }
+        }
+
+        /* Estilo para o conteúdo da esquerda e direita */
+        .esquerda,
+        .direita {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 8px;
+            width: 100%;
+        }
     </style>
 </head>
 
 <body class="background">
     <div class="container">
-        <div class="esquerdo">
-            <h1>Hello World</h1>
-        </div>
+        <header>
+            <a href="index.html" class="voltar"><img src="img/seta-voltar-borda.png" alt="Voltar" title="Voltar"></a>
+        </header>
+        <main class="conteudo">
+            <div class="esquerda">
+                <form action="#">
 
-        <div class="direita">
+                    <label for="tipo-juros">SELECIONE O TIPO DE JUROS</label>
+                    <select class="juros" id="tipo-juros" required>
+                        <option value="juros-compostos">Juros Compostos</option>
+                        <option value="juros-compostos">Juros Simples</option>
+                    </select>
 
-        </div>
+                    <label for="capital">CAPITAL INICIAL</label>
+                    <input type="number" class="capital" id="capital-inicial"  required>
+
+                    <div class="input-group-um">
+                        <label for="anos">ANOS</label>
+                        <input type="number" class="anos" id="tempo-anos" required>
+    
+                        <label for="meses">MESES</label>
+                        <input type="number" class="meses" id="tempo-meses" required>
+                    </div>
+
+                    <label for="aporte">APORTE MENSAL</label>
+                    <input type="number" class="aporte" id="aporte-mensal">
+
+                    <div class="input-group-dois">
+                        <label for="taxa">TAXA DE JUROS</label>
+                        <input type="number" class="taxa" id="taxa-juros" required>
+
+                        <select class="periodo" id="periodo" required>
+                            <option value="anual">Anual</option>
+                            <option value="mensal">Mensal</option>
+                            <option value="diario">Diário</option>
+                        </select>
+                    </div>
+
+                    <div class="botao-container">
+                        <button type="submit">CALCULAR</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="direita">
+                <div class="valor-calculado" id="valor-calculado">
+
+                </div>
+            </div>
+        </main>
     </div>
+
+    <script src="calculadora-juros.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voltar para o Index</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link para o CSS externo -->
+
+    <style>
+        /* Estilo do container flex */
+        .container {
+            display: flex;
+            /* Define o container como flex */
+            justify-content: center;
+            /* Centraliza o conteúdo no eixo horizontal */
+            align-items: center;
+            /* Centraliza o conteúdo no eixo vertical (opcional) */
+            gap: 20px;
+            /* Espaçamento entre as divs */
+            height: 100vh;
+            /* Altura para centralização vertical (opcional) */
+        }
+
+        /* Estilo para o conteúdo da esquerda e direita */
+        .conteudo-esquerda,
+        .conteudo-direita {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        /* Responsividade: quando a tela for menor que 600px */
+        @media (max-width: 600px) {
+            .container {
+                flex-direction: column;
+                /* Empilha as divs verticalmente em telas pequenas */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="conteudo-esquerda">
+            <p>Conteúdo da Esquerda</p>
+        </div>
+        <div class="conteudo-direita">
+            <p>Conteúdo da Direita</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

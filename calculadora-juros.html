@@ -12,6 +12,10 @@
     <link rel="shortcut icon" href="" type="image/x-icon">
 
     <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
         body,
         html {
             margin: 0;
@@ -28,6 +32,12 @@
             height: 100vh;
         }
 
+        @media (max-width: 600px) {
+            .background {
+                height: auto;
+            }
+        }
+
         .container {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
             backdrop-filter: blur(10px);
@@ -42,7 +52,7 @@
 
         @media (max-width: 768px) {
             .container {
-                max-width: 700px;
+                max-width: 100%;
             }
         }
 
@@ -87,6 +97,157 @@
             padding: 20px;
             border-radius: 8px;
             width: 100%;
+            display: flex;
+            box-sizing: border-box;
+        }
+
+        .direita {
+            flex-direction: column;
+        }
+
+        /* Responsividade: quando a tela for menor que 600px */
+        @media (max-width: 600px) {
+
+            .esquerda {
+                flex-direction: column;
+                /* Empilha as divs verticalmente em telas pequenas */
+            }
+        }
+
+        .esquerda div,
+        .direita div {
+            padding-bottom: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .esquerda div,
+            .direita div {
+                padding-bottom: 15px;
+            }
+        }
+
+        input {
+            border: none;
+            padding: 7px;
+            border-radius: 5px;
+        }
+
+        select {
+            border: none;
+            padding: 7px;
+            border-radius: 5px;
+        }
+
+        .campo-tipo-juros select {
+            width: 100%;
+        }
+
+        .campo-capital input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .campo-aporte input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .input-group-um {
+            display: flex;
+            justify-content: space-between;
+            gap: 2em;
+        }
+
+        /* Responsividade: quando a tela for menor que 600px */
+        @media (max-width: 600px) {
+            .input-group-um {
+                flex-direction: column;
+                /* Empilha as divs verticalmente em telas pequenas */
+                gap: 0;
+            }
+        }
+
+        .input-group-um input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+
+        /* Responsividade: quando a tela for menor que 600px */
+        @media (max-width: 600px) {
+            .input-group-um {
+                flex-direction: column;
+                /* Empilha as divs verticalmente em telas pequenas */
+                gap: 0;
+            }
+        }
+
+        .input-group-dois {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .input-group-dois label,
+        .input-group-dois input,
+        .input-group-dois select {
+            box-sizing: border-box;
+        }
+
+        .input-group-dois label {
+            width: 100%;
+        }
+
+        .input-group-dois input {
+            width: 74%;
+        }
+
+        .input-group-dois select {
+            width: 24%;
+        }
+
+        @media (max-width: 600px) {
+            .input-group-dois {
+                flex-direction: column;
+            }
+
+            .input-group-dois label,
+            .input-group-dois input,
+            .input-group-dois select {
+                box-sizing: border-box;
+                margin-bottom: 10px;
+            }
+
+            .input-group-dois label {
+                width: 100%;
+            }
+
+            .input-group-dois input {
+                width: 100%;
+            }
+
+            .input-group-dois select {
+                width: 100%;
+            }
+        }
+
+        .botao-container {
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .botao-container button {
+            width: 65%;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .botao-container button {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -100,29 +261,41 @@
             <div class="esquerda">
                 <form action="#">
 
-                    <label for="tipo-juros">SELECIONE O TIPO DE JUROS</label>
-                    <select class="juros" id="tipo-juros" required>
-                        <option value="juros-compostos">Juros Compostos</option>
-                        <option value="juros-compostos">Juros Simples</option>
-                    </select>
-
-                    <label for="capital">CAPITAL INICIAL</label>
-                    <input type="number" class="capital" id="capital-inicial"  required>
-
-                    <div class="input-group-um">
-                        <label for="anos">ANOS</label>
-                        <input type="number" class="anos" id="tempo-anos" required>
-    
-                        <label for="meses">MESES</label>
-                        <input type="number" class="meses" id="tempo-meses" required>
+                    <div class="campo-tipo-juros">
+                        <label for="tipo-juros">SELECIONE O TIPO DE JUROS</label>
+                        <select class="juros" id="tipo-juros" required>
+                            <option value="juros-compostos">Juros Compostos</option>
+                            <option value="juros-compostos">Juros Simples</option>
+                        </select>
                     </div>
 
-                    <label for="aporte">APORTE MENSAL</label>
-                    <input type="number" class="aporte" id="aporte-mensal">
+                    <div class="campo-capital">
+                        <label for="capital">CAPITAL INICIAL</label>
+                        <input type="number" class="capital" id="capital-inicial"
+                            placeholder="Insira valor inicial do investimento" required>
+                    </div>
+
+                    <div class="input-group-um">
+                        <div class="campo-anos">
+                            <label for="anos">ANOS</label>
+                            <input type="number" class="anos" id="tempo-anos" required>
+                        </div>
+
+                        <div class="campo-meses">
+                            <label for="meses">MESES</label>
+                            <input type="number" class="meses" id="tempo-meses" required>
+                        </div>
+                    </div>
+
+                    <div class="campo-aporte">
+                        <label for="aporte">APORTE MENSAL</label>
+                        <input type="number" class="aporte" id="aporte-mensal"
+                            placeholder="Insira valor do aporte mensal">
+                    </div>
 
                     <div class="input-group-dois">
                         <label for="taxa">TAXA DE JUROS</label>
-                        <input type="number" class="taxa" id="taxa-juros" required>
+                        <input type="number" class="taxa" id="taxa-juros" placeholder="Insira a taxa de juros" required>
 
                         <select class="periodo" id="periodo" required>
                             <option value="anual">Anual</option>
@@ -132,6 +305,9 @@
                     </div>
 
                     <div class="botao-container">
+                        <div>
+
+                        </div>
                         <button type="submit">CALCULAR</button>
                     </div>
                 </form>
@@ -139,7 +315,11 @@
 
             <div class="direita">
                 <div class="valor-calculado" id="valor-calculado">
+                    <h1>ola pessoas</h1>
+                </div>
 
+                <div class="juros-gerados" id="juros-gerados">
+                    <h1>Ola pessoas</h1>
                 </div>
             </div>
         </main>

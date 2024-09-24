@@ -120,6 +120,7 @@
         }
 
         @media (max-width: 600px) {
+
             .esquerda div,
             .direita div {
                 padding-bottom: 15px;
@@ -130,6 +131,13 @@
             border: none;
             padding: 7px;
             border-radius: 5px;
+        }
+
+        /* Estilo para garantir que não haja setas de incremento/decremento em navegadores */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
         }
 
         select {
@@ -176,6 +184,11 @@
             background-color: rgb(216, 216, 216);
         }
 
+        .dias {
+            background-color: rgb(216, 216, 216);
+            width: 100%;
+            box-sizing: border-box;
+        }
 
         /* Responsividade: quando a tela for menor que 600px */
         @media (max-width: 600px) {
@@ -302,7 +315,7 @@
 
                     <div class="campo-capital">
                         <label for="capital">CAPITAL INICIAL</label>
-                        <input type="number" class="capital" id="capital-inicial"
+                        <input type="text" class="capital" id="capital-inicial"
                             placeholder="Insira valor inicial do investimento" required>
                     </div>
 
@@ -316,28 +329,39 @@
                             <label for="anos">ANOS</label>
                             <input type="number" class="anos" id="tempo-anos" disabled>
                         </div>
+                    </div>
 
+                    <div class="campo-dias">
+                        <label for="dias">DIAS</label>
+                        <input type="number" class="dias" id="tempo-dias" disabled>
                     </div>
 
                     <div class="campo-aporte">
                         <label for="aporte">APORTE MENSAL</label>
-                        <input type="number" class="aporte" id="aporte-mensal"
+                        <input type="text" class="dinheiro aporte" id="aporte-mensal"
                             placeholder="Insira valor do aporte mensal">
                     </div>
 
                     <div class="input-group-dois">
                         <label for="taxa">TAXA DE JUROS</label>
-                        <input type="number" class="taxa" id="taxa-juros" placeholder="Insira a taxa de juros em porcentagem" required>
+                        <input type="text" class="taxa" id="taxa-juros"
+                            placeholder="Insira a taxa de juros em porcentagem" required>
 
                         <select class="periodo" id="periodo" required>
                             <option value="anual">Anual</option>
                             <option value="mensal">Mensal</option>
+                            <option value="diario">Diário</option>
                         </select>
                     </div>
 
                     <div class="botao-container">
                         <button type="submit" onclick="calcularInvestimento(
-                            document.getElementById('tipo-juros').value, document.getElementById('capital-inicial').value, document.getElementById('tempo-meses').value, document.getElementById('aporte-mensal').value, document.getElementById('taxa-juros').value, document.getElementById('periodo').value
+                            document.getElementById('tipo-juros').value, 
+                            document.getElementById('capital-inicial').value, 
+                            document.getElementById('tempo-meses').value, 
+                            document.getElementById('aporte-mensal').value, 
+                            document.getElementById('taxa-juros').value, 
+                            document.getElementById('periodo').value
                         )">CALCULAR</button>
                     </div>
                 </form>

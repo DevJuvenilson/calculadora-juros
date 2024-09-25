@@ -55,9 +55,9 @@ function calcularAnosDias() {
 async function calcularInvestimento(tipoJuros, capitalInicial, meses, aporteMensal, taxaJuros, periodo) {
 
     if (tipoJuros != null) {
-        const capital = parseFloat(capitalInicial.replace(/[^\d,.-]/g, '').replace(',', '.'));
-        const taxa = parseFloat(taxaJuros.replace(/[^\d,.-]/g, '').replace(',', '.'));
-        const aporte = parseFloat(aporteMensal.replace(/[^\d,.-]/g, '').replace(',', '.'));
+        const capital = await formatarParaNumero(capitalInicial);
+        const taxa = await formatarParaNumero(taxaJuros);
+        const aporte = await formatarParaNumero(aporteMensal);
 
         if (tipoJuros === 'juros-compostos') {
             await calcularJurosCompostos(capital, meses, aporte, taxa, periodo);
@@ -69,6 +69,11 @@ async function calcularInvestimento(tipoJuros, capitalInicial, meses, aporteMens
     };
 };
 
+// Corrige a formatação de valores inseridos como moeda
+async function formatarParaNumero(valor) {
+    return parseFloat(valor.replace(/[^\d,.-]/g, '').replace(/\./g, '').replace(',', '.'));
+}
+
 async function calcularJurosCompostos(capitalInicial, meses, aporteMensal, taxaJuros, periodo) {
     //CALCULO
     if (capitalInicial >= 0 && 
@@ -76,7 +81,7 @@ async function calcularJurosCompostos(capitalInicial, meses, aporteMensal, taxaJ
         aporteMensal >= 0 && 
         taxaJuros > 0 && 
         periodo != null) {
-
+            
         const taxa = taxaJuros / 100;
         const anos = document.getElementById('tempo-anos');
         const dias = document.getElementById('tempo-dias');
@@ -90,7 +95,7 @@ async function calcularJurosCompostos(capitalInicial, meses, aporteMensal, taxaJ
 
         } else if (periodo === 'mensal') {
             if (aporteMensal > 0) {
-                var saldoTotal = (capitalInicial * ((1 + taxa) ** anos.value) + aporteMensal * ((((1 + taxa) ** meses) - 1) / taxa));
+                var saldoTotal = (capitalInicial * ((1 + taxa) ** meses) + (aporteMensal * (((1 + taxa) ** meses) - 1) / taxa));
             } else {
                 var saldoTotal = capitalInicial * ((1 + taxa) ** meses);
             }
@@ -114,15 +119,15 @@ async function calcularJurosCompostos(capitalInicial, meses, aporteMensal, taxaJ
 
         campoSaldoTotal.innerHTML = `
             <h1>SALDO TOTAL:</h1>
-            <p>R$ ${saldoTotal.toFixed(2).replace('.', ',')}</p>
+            <p>${saldoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
         `;
 
         campoJurosGerados.innerHTML = `
             <h1>JUROS GERADOS:</h1>
-            <p>R$ ${jurosRendidos.toFixed(2).replace('.', ',')}</p>
+            <p>${jurosRendidos.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
         `
     } else {
-        alert('Insira valores válidos')
+        alert('Insira valores válidos!')
     };
 };
 
@@ -167,12 +172,12 @@ async function calcularJurosSimples(capitalInicial, meses, aporteMensal, taxaJur
 
         campoSaldoTotal.innerHTML = `
             <h1>SALDO TOTAL:</h1>
-            <p>R$ ${saldoTotal.toFixed(2)}</p>
+            <p>${saldoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
         `;
 
         campoJurosGerados.innerHTML = `
             <h1>JUROS GERADOS:</h1>
-            <p>R$ ${jurosRendidos.toFixed(2)}</p>
+            <p>${jurosRendidos.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
         `
     } else {
         alert('Insira valores válidos')
